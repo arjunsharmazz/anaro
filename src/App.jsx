@@ -4,6 +4,8 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
+import WhatsAppButton from './components/WhatsAppButton';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ShopPage = lazy(() => import('./pages/ShopPage'));
@@ -18,6 +20,7 @@ function App() {
   return (
     <div className="min-h-screen bg-obsidian text-white transition-colors duration-300">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(139,0,0,0.24),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(139,94,60,0.18),_transparent_26%)]" />
+      <ScrollToTop />
       <Navbar />
       <Suspense fallback={<Loader fullScreen label="Loading Anaro" />}>
         <AnimatePresence mode="wait">
@@ -33,6 +36,7 @@ function App() {
         </AnimatePresence>
       </Suspense>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

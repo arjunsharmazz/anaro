@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../hooks/useCartStore';
+import { formatCurrency } from '../utils/currency';
 import Button from './Button';
 
 function ProductCard({ product }) {
@@ -45,7 +46,7 @@ function ProductCard({ product }) {
         {product.title}
       </Link>
       <div className="mt-4 flex items-center justify-between gap-3">
-        <p className="text-lg font-semibold text-white">${product.price}</p>
+        <p className="text-lg font-semibold text-white">{formatCurrency(product.price)}</p>
         <Button
           type="button"
           onClick={() => addToCart(product)}

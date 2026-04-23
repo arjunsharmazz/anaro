@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard';
 import PageShell from '../components/PageShell';
 import { SkeletonCard } from '../components/Loader';
 import { categories, products } from '../data/products';
+import { formatCurrency } from '../utils/currency';
 
 const sortOptions = {
   trending: (a, b) => Number(b.trending) - Number(a.trending) || b.rating - a.rating,
@@ -15,7 +16,9 @@ const sortOptions = {
 function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedSizes, setSelectedSizes] = useState([]);
-  const [price, setPrice] = useState(200);
+  const maxPrice = Math.max(...products.map((product) => product.price));
+  const minPrice = Math.min(...products.map((product) => product.price));
+  const [price, setPrice] = useState(maxPrice);
   const [sortBy, setSortBy] = useState('trending');
 
   const activeCategory = searchParams.get('category') || 'All';
@@ -71,13 +74,13 @@ function ShopPage() {
               <p className="text-xs uppercase tracking-[0.3em] text-white/60">Price range</p>
               <input
                 type="range"
-                min="50"
-                max="200"
+                min={minPrice}
+                max={maxPrice}
                 value={price}
                 onChange={(event) => setPrice(Number(event.target.value))}
                 className="mt-4 w-full accent-crimson-500"
               />
-              <p className="mt-2 text-sm text-white/70">Up to ${price}</p>
+              <p className="mt-2 text-sm text-white/70">Up to {formatCurrency(price)}</p>
             </div>
 
             <div className="mt-8">

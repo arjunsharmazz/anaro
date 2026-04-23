@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import PageShell from '../components/PageShell';
 import { useCartStore } from '../hooks/useCartStore';
+import { formatCurrency } from '../utils/currency';
 
 function CartPage() {
   const cart = useCartStore((state) => state.cart);
@@ -40,7 +41,7 @@ function CartPage() {
                         <h2 className="mt-2 font-display text-2xl text-white">{item.title}</h2>
                         <p className="mt-2 text-sm text-white/60">Size {item.selectedSize}</p>
                       </div>
-                      <p className="text-xl font-semibold text-white">${item.price}</p>
+                      <p className="text-xl font-semibold text-white">{formatCurrency(item.price)}</p>
                     </div>
                     <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
                       <div className="flex items-center gap-2 rounded-full border border-white/10 px-3 py-2">
@@ -72,7 +73,7 @@ function CartPage() {
             <div className="mt-8 space-y-4 text-sm text-white/68">
               <div className="flex items-center justify-between">
                 <span>Subtotal</span>
-                <span className="text-white">${subtotal.toFixed(2)}</span>
+                <span className="text-white">{formatCurrency(subtotal)}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Delivery</span>
@@ -80,7 +81,7 @@ function CartPage() {
               </div>
               <div className="flex items-center justify-between border-t border-white/10 pt-4 text-base">
                 <span>Total</span>
-                <span className="font-semibold text-white">${subtotal.toFixed(2)}</span>
+                <span className="font-semibold text-white">{formatCurrency(subtotal)}</span>
               </div>
             </div>
             <Link to="/checkout" className="mt-8 block">

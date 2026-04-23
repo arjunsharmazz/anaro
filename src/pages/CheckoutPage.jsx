@@ -2,6 +2,7 @@ import { CreditCard, Landmark, MapPinHouse } from 'lucide-react';
 import Button from '../components/Button';
 import PageShell from '../components/PageShell';
 import { useCartStore } from '../hooks/useCartStore';
+import { formatCurrency } from '../utils/currency';
 
 const paymentOptions = [
   { id: 'card', label: 'Card', icon: CreditCard },
@@ -61,7 +62,7 @@ function CheckoutPage() {
                   <img src={item.image} alt={item.title} className="h-16 w-16 rounded-2xl object-cover" loading="lazy" />
                   <div className="flex-1">
                     <p className="font-medium text-white">{item.title}</p>
-                    <p className="text-sm text-white/60">{item.quantity} x ${item.price}</p>
+                    <p className="text-sm text-white/60">{item.quantity} x {formatCurrency(item.price)}</p>
                   </div>
                 </div>
               ))}
@@ -69,7 +70,7 @@ function CheckoutPage() {
             <div className="mt-6 border-t border-white/10 pt-4 text-sm text-white/68">
               <div className="flex items-center justify-between">
                 <span>Subtotal</span>
-                <span className="text-white">${subtotal.toFixed(2)}</span>
+                <span className="text-white">{formatCurrency(subtotal)}</span>
               </div>
               <div className="mt-3 flex items-center justify-between">
                 <span>Shipping</span>
@@ -77,7 +78,7 @@ function CheckoutPage() {
               </div>
               <div className="mt-4 flex items-center justify-between text-base">
                 <span>Total</span>
-                <span className="font-semibold text-white">${subtotal.toFixed(2)}</span>
+                <span className="font-semibold text-white">{formatCurrency(subtotal)}</span>
               </div>
             </div>
           </aside>

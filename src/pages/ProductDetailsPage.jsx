@@ -6,6 +6,7 @@ import PageShell from '../components/PageShell';
 import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
 import { useCartStore } from '../hooks/useCartStore';
+import { formatCurrency } from '../utils/currency';
 
 const reviews = [
   { name: 'Mira', comment: 'The finish feels expensive and the fit is precise.', rating: 5 },
@@ -53,7 +54,7 @@ function ProductDetailsPage() {
             <p className="text-xs uppercase tracking-[0.3em] text-white/60">{product.category}</p>
             <h1 className="mt-3 font-display text-4xl text-white">{product.title}</h1>
             <div className="mt-4 flex items-center gap-4">
-              <p className="text-3xl font-semibold text-white">${product.price}</p>
+              <p className="text-3xl font-semibold text-white">{formatCurrency(product.price)}</p>
               <span className="inline-flex items-center gap-1 rounded-full border border-white/10 px-3 py-1 text-sm text-white/70">
                 <Star size={14} fill="currentColor" className="text-sand-500" /> {product.rating}
               </span>
